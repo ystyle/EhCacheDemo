@@ -5,6 +5,8 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
     CacheManager manager;
@@ -66,13 +68,17 @@ public class Main {
     }
 
     private void monitoring() {
-        while (true){
-            String names[] = manager.getCacheNames();
-            for (String name : names) {
-                Cache cache=manager.getCache(name);
-                System.out.println("缓存个数为："+cache.getSize());
+        Timer timer = new Timer();//new Timer(()->{},2L,2L);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                String names[] = manager.getCacheNames();
+                for (String name : names) {
+                    Cache cache=manager.getCache(name);
+                    System.out.println("缓存个数为："+cache.getSize());
+                }
             }
-        }
+        },1L,1000 * 3l);
     }
 
     private void getAll() {
