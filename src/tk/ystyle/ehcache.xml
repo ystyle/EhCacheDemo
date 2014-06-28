@@ -3,27 +3,41 @@
 <ehcache>
     <!-- 指定除自身之外的网络群体中其他提供同步的主机列表，用“|”分开不同的主机 -->
     <cacheManagerPeerProviderFactory
-    class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-    properties="peerDiscovery=manual,rmiUrls=//localhost:1614/kvs|//localhost:1614/kvs" />
+        class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+        properties="peerDiscovery=manual,rmiUrls=//localhost:1614/book|//localhost:1615/book" />
     <!-- 配宿主主机配置监听程序，来发现其他主机发来的同步请求 -->
     <cacheManagerPeerListenerFactory
-    class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-    properties="port=1614,socketTimeoutMillis=120000" />
+        class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+        properties="port=1614,socketTimeoutMillis=120000" />
+    <!--<cacheManagerPeerProviderFactory-->
+            <!--class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"-->
+            <!--properties="-->
+            <!--peerDiscovery=automatic,-->
+            <!--multicastGroupAddress=230.0.0.1,-->
+            <!--multicastGroupPort=4446,-->
+            <!--timeToLive=32"/>-->
 
     <defaultCache
-            maxElementsInMemory="100"
+            maxElementsInMemory="2147483647"
             eternal="false"
             timeToIdleSeconds="259200000"
             memoryStoreEvictionPolicy="LRU"
             timeToLiveSeconds="259200000">
     </defaultCache>
-    <cache name="kvs"
-           maxElementsInMemory="100"
+    <cache name="book"
+           maxElementsInMemory="2147483647"
            eternal="false"
            timeToIdleSeconds="259200000"
            memoryStoreEvictionPolicy="LRU"
            timeToLiveSeconds="259200000">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+           properties="replicateAsynchronously=true,
+           replicatePuts=true,
+           replicateUpdates=true,
+           replicateUpdatesViaCopy=true,
+           replicateRemovals=true"/>
+        <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
     </cache>
     <!--
     ·name：Cache的唯一标识
