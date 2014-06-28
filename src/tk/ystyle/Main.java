@@ -28,8 +28,8 @@ public class Main {
         manager = new CacheManager(fileName);
         //取出所有的cacheName
         String names[] = manager.getCacheNames();
-        for(int i=0;i<names.length;i++){
-            System.out.println(names[i]);//输出所有Cache名称
+        for (String name : names) {
+            System.out.println(name);//输出所有Cache名称
         }
         cache=manager.getCache("book");//得到本程序操作的cache
     }
@@ -49,6 +49,7 @@ public class Main {
         System.out.println("3,查看缓存数量");
         System.out.println("4,监控缓存数量(不能退出)");
         System.out.println("5,批量添加数据");
+        System.out.println("6,测试命中");
         System.out.println("Q,退出");
         String str = s.next();
         switch (str){
@@ -67,6 +68,9 @@ public class Main {
             case "5":
                 addSomeBooks();//批量添加数据
                 break;
+            case "6":
+                testHitCount();//测试命中
+                break;
             case "Q":
                 closs();
                 System.exit(0);
@@ -75,6 +79,19 @@ public class Main {
                 break;
         }
         menu();//显示菜单
+    }
+
+    /**
+     * 测试命中
+     */
+    private void testHitCount() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("bookno:");
+        String bookno = s.next();
+        for (int i = 0; i < 10000; i++) {
+           cache.get(bookno).getObjectValue().toString();
+        }
+        System.out.println(cache.get(bookno).getHitCount());
     }
 
     /**
@@ -156,5 +173,5 @@ public class Main {
         manager.shutdown();
     }
 
-    
+
 }
