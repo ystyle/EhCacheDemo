@@ -4,11 +4,11 @@
     <!-- 指定除自身之外的网络群体中其他提供同步的主机列表，用“|”分开不同的主机 -->
     <cacheManagerPeerProviderFactory
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-        properties="peerDiscovery=manual,rmiUrls=//localhost:1614/book|//localhost:1615/book|//localhost:1616/book|//localhost:1616/book" />
+        properties="peerDiscovery=manual,rmiUrls=//ystyle-nodejs-118396.apse1.nitrousbox.com:3000/book|//ystyle-go-125967.apse1.nitrousbox.com:3000/book" />
     <!-- 配宿主主机配置监听程序，来发现其他主机发来的同步请求 -->
     <cacheManagerPeerListenerFactory
         class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-        properties="port=1614,socketTimeoutMillis=120000" />
+        properties="port=3000,socketTimeoutMillis=120000" />
     <!-- EhCache 的 RMI 集群模式还有另外一种节点发现方式，
         就是通过多播（ multicast ）来维护集群中的所有有效节点。
         这也是最为简单而且灵活的方式，与手工模式不同的是，

@@ -5,9 +5,7 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import tk.ystyle.entity.Book;
 
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Main {
     CacheManager manager;//缓存管理器
@@ -24,8 +22,8 @@ public class Main {
      */
     private void init() {
         //指定ehcache.xml的位置
-        String fileName="D:\\Eclipse\\EhCache\\src\\tk\\ystyle\\ehcache.xml";
-        manager = new CacheManager(fileName);
+//        String fileName=path;
+        manager = CacheManager.create();//new CacheManager(fileName);
         //取出所有的cacheName
         String names[] = manager.getCacheNames();
         for (String name : names) {
@@ -101,7 +99,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         System.out.println("添加多少个缓存:");
         long number = s.nextLong();
-        int see = Math.round(System.currentTimeMillis());
+        long see = System.currentTimeMillis();
         System.out.println("种子为:"+see);
         for (long i = 0; i < number; i++) {
             Book book = new Book();
@@ -138,6 +136,11 @@ public class Main {
         for (String name : names) {
             Cache cache=manager.getCache(name);
             System.out.println("缓存个数为："+cache.getSize());
+            List<String> list= cache.getKeys();
+            for (String s : list) {
+                System.out.println(cache.get(s).getObjectValue().toString());
+            }
+
         }
     }
 

@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by 小奕 on 2014-06-28 23:16.
  */
 public class Book implements Serializable{
+    private static final long serialVersionUID = -4402392412217726278L;
     private String bookno;
     private String name;
     private String author;
