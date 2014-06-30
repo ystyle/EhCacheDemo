@@ -55,6 +55,7 @@ public class Main {
         System.out.println("5,批量添加数据");
         System.out.println("6,测试命中");
         System.out.println("7,批量添加数据(Order 20列)");
+        System.out.println("C,清空缓存");
         System.out.println("Q,退出");
         String str = s.next();
         switch (str){
@@ -79,6 +80,9 @@ public class Main {
             case "7":
                 addSomeOrders();//批量添加数据(Order 20列)
                 break;
+            case "C":
+                claerCache();//清空缓存
+                break;
             case "Q":
                 closs();
                 System.exit(0);
@@ -87,6 +91,13 @@ public class Main {
                 break;
         }
         menu();//显示菜单
+    }
+
+    private void claerCache() {
+        System.out.println("缓存个数为："+cache.getSize());
+        cache.removeAll();
+        cache.flush();
+        System.out.println("缓存个数为："+cache.getSize());
     }
 
     /**
@@ -98,6 +109,7 @@ public class Main {
         long number = s.nextLong();
         long see = System.currentTimeMillis();
         System.out.println("种子为:"+see);
+        long start = System.currentTimeMillis();
         for (long i = 0; i < number; i++) {
             Order order = new Order();
             order.setOrderno(see+""+i);
@@ -122,6 +134,8 @@ public class Main {
             order.setReceivedfee(new Double(i));
             cache.put(new Element(order.getOrderno(),order));
         }
+        long end = System.currentTimeMillis();
+        System.out.println("花费时间："+(end-start));
     }
 
     /**
@@ -146,6 +160,7 @@ public class Main {
         long number = s.nextLong();
         long see = System.currentTimeMillis();
         System.out.println("种子为:"+see);
+        long start = System.currentTimeMillis();
         for (long i = 0; i < number; i++) {
             Book book = new Book();
             book.setName("书名"+see+i);
@@ -154,6 +169,8 @@ public class Main {
             book.setPrice("100");
             cache.put(new Element(book.getBookno(),book));
         }
+        long end = System.currentTimeMillis();
+        System.out.println("花费时间："+(end-start));
     }
 
     /**
