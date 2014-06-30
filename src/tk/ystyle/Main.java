@@ -3,9 +3,12 @@ package tk.ystyle;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 import tk.ystyle.entity.Book;
 import tk.ystyle.entity.Order;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -51,7 +54,7 @@ public class Main {
         System.out.println("1,添加缓存");
         System.out.println("2,获取一个缓存");
         System.out.println("3,查看缓存数量");
-        System.out.println("4,监控缓存数量(不能退出)");
+        System.out.println("4,监控缓存数量(按T退出)");
         System.out.println("5,批量添加数据");
         System.out.println("6,测试命中");
         System.out.println("7,批量添加数据(Order 20列)");
@@ -188,6 +191,18 @@ public class Main {
                 }
             }
         },1L,1000 * 3l);
+        while (true){
+            try {
+                int str =  System.in.read();
+                if (str == (int)'T'){
+                    timer.cancel();
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     /**
@@ -199,8 +214,16 @@ public class Main {
             Cache cache=manager.getCache(name);
             System.out.println("缓存个数为："+cache.getSize());
             List<String> list= cache.getKeys();
-            for (String s : list) {
-                System.out.println(cache.get(s).getObjectValue().toString());
+            if (list.size()>100){
+                System.out.println("由于缓存数量太多，只输出100条");
+                for (int i = 0; i < 100; i++) {
+                    System.out.println(cache.get(list.get(i)).getObjectValue().toString());
+                }
+                System.out.println("由于缓存数量太多，只输出100条");
+            }else {
+                for (String s : list) {
+                    System.out.println(cache.get(s).getObjectValue().toString());
+                }
             }
             System.out.println("缓存个数为："+cache.getSize());
         }
@@ -211,7 +234,7 @@ public class Main {
      */
     private void get() {
         Scanner s = new Scanner(System.in);
-        System.out.println("key:");
+        System.out.println("KEY:");
         String key = s.next();
         Element element= cache.get(key);
         if (element != null) {
@@ -226,9 +249,9 @@ public class Main {
      */
     private void add() {
         Scanner s = new Scanner(System.in);
-        System.out.println("bookno:");
+        System.out.println("KEY:");
         String bookno = s.next();
-        System.out.println("name:");
+        System.out.println("NAME:");
         String name = s.next();
         cache.put(new Element(bookno,new Book(bookno,name)));
         System.out.println("成功：KEY:"+bookno+"->value:" + cache.get(bookno).getObjectValue().toString());
