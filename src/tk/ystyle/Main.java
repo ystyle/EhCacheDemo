@@ -4,11 +4,9 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import tk.ystyle.entity.Book;
+import tk.ystyle.entity.Order;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Main {
     CacheManager manager;//缓存管理器
@@ -56,6 +54,7 @@ public class Main {
         System.out.println("4,监控缓存数量(不能退出)");
         System.out.println("5,批量添加数据");
         System.out.println("6,测试命中");
+        System.out.println("7,批量添加数据(Order 20列)");
         System.out.println("Q,退出");
         String str = s.next();
         switch (str){
@@ -77,6 +76,9 @@ public class Main {
             case "6":
                 testHitCount();//测试命中
                 break;
+            case "7":
+                addSomeOrders();//批量添加数据(Order 20列)
+                break;
             case "Q":
                 closs();
                 System.exit(0);
@@ -85,6 +87,41 @@ public class Main {
                 break;
         }
         menu();//显示菜单
+    }
+
+    /**
+     * 批量添加数据(Order 20列)
+     */
+    private void addSomeOrders() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("添加多少个缓存:");
+        long number = s.nextLong();
+        long see = System.currentTimeMillis();
+        System.out.println("种子为:"+see);
+        for (long i = 0; i < number; i++) {
+            Order order = new Order();
+            order.setOrderno(see+""+i);
+            order.setType(1);
+            order.setApproveuser("用户" +see+""+1);
+            order.setApuser("用户" +see+""+1);
+            order.setConsigneeaddress("地址" +see+""+1);
+            order.setNote(false);
+            order.setCrtime(new Date());
+            order.setCruser("用户"+see+""+1);
+            order.setRetono("订单"+see+""+1);
+            order.setWhcode("仓库"+see+""+1);
+            order.setStorecode("门店"+see+""+1);
+            order.setExpresscode("邮编"+see+""+1);
+            order.setExpressnumber("快递"+see+""+1);
+            order.setMobile("13800138000");
+            order.setConsigneeaddress("固定地址"+see+""+1);
+            order.setConsigneename("编码"+see+""+1);
+            order.setShopcode("商店"+see+""+1);
+            order.setShopname("商店名称"+see+""+1);
+            order.setTradeid(see+""+1);
+            order.setReceivedfee(new Double(i));
+            cache.put(new Element(order.getOrderno(),order));
+        }
     }
 
     /**
@@ -148,7 +185,7 @@ public class Main {
             for (String s : list) {
                 System.out.println(cache.get(s).getObjectValue().toString());
             }
-
+            System.out.println("缓存个数为："+cache.getSize());
         }
     }
 
