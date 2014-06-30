@@ -4,8 +4,17 @@
       <root url="jar://D:/JAVA-lib/EhCache/ehcache-2.8.3.jar!/" />
       <root url="jar://D:/JAVA-lib/EhCache/slf4j-api-1.6.6.jar!/" />
       <root url="jar://D:/JAVA-lib/EhCache/slf4j-jdk14-1.6.6.jar!/" />
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-jgroupsreplication-1.7.jar!/" />
+      <root url="jar://D:/JAVA-lib/EhCache/jgroups-3.4.4.Final.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-jgroupsreplication-1.7-javadoc.jar!/" />
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-2.8.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-jgroupsreplication-1.7-sources.jar!/" />
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-2.8.3-sources.jar!/fi" />
+      <root url="jar://D:/JAVA-lib/EhCache/ehcache-2.8.3-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

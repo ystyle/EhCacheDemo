@@ -2,13 +2,13 @@
 
 <ehcache>
     <!-- 指定除自身之外的网络群体中其他提供同步的主机列表，用“|”分开不同的主机 -->
-    <cacheManagerPeerProviderFactory
+<!--    <cacheManagerPeerProviderFactory
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-        properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:1615/book|//127.0.0.1:1616/book" />
+        properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:1615/book|//127.0.0.1:1616/book" />-->
      <!--配宿主主机配置监听程序，来发现其他主机发来的同步请求-->
-    <cacheManagerPeerListenerFactory
-        class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-        properties="port=1614,socketTimeoutMillis=120000" />
+    <!--<cacheManagerPeerListenerFactory-->
+        <!--class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"/>-->
+     <!--properties="port=3000,socketTimeoutMillis=120000" />-->
     <!-- EhCache 的 RMI 集群模式还有另外一种节点发现方式，
         就是通过多播（ multicast ）来维护集群中的所有有效节点。
         这也是最为简单而且灵活的方式，与手工模式不同的是，
@@ -21,6 +21,12 @@
             multicastGroupAddress=230.0.0.1,
             multicastGroupPort=3000,
             timeToLive=32"/>-->
+    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
+            properties="connect=UDP(mcast_addr=231.12.21.132;mcast_port=45566;):PING:
+    MERGE2:FD_SOCK:VERIFY_SUSPECT:pbcast.NAKACK:UNICAST:pbcast.STABLE:FRAG:pbcast.GMS"
+            propertySeparator="::"
+            />
     <defaultCache
             maxElementsInMemory="2147483647"
             eternal="false"
@@ -34,13 +40,17 @@
            timeToIdleSeconds="259200000"
            memoryStoreEvictionPolicy="LRU"
            timeToLiveSeconds="259200000">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+<!--        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
            properties="replicateAsynchronously=true,
            replicatePuts=true,
            replicateUpdates=true,
            replicateUpdatesViaCopy=true,
            replicateRemovals=true"/>
-        <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+        <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+                properties="replicateAsynchronously=true, replicatePuts=true,replicateUpdates=true, replicateUpdatesViaCopy=true,replicateRemovals=true" />
+        <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsBootstrapCacheLoaderFactory"/>
     </cache>
     <!--
     ·name：Cache的唯一标识

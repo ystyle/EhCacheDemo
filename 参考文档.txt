@@ -1,0 +1,5 @@
+深入探讨在集群环境中使用 EhCache 缓存系统
+http://www.ibm.com/developerworks/cn/java/j-lo-ehcache/
+
+EhCache 分布式下缓存对象的同步 - OPEN 开发经验库
+http://www.open-open.com/lib/view/open1346722442303.html
