@@ -4,23 +4,23 @@
     <!-- 指定除自身之外的网络群体中其他提供同步的主机列表，用“|”分开不同的主机 -->
     <cacheManagerPeerProviderFactory
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-        properties="peerDiscovery=manual,rmiUrls=//ystyle-nodejs-118396.apse1.nitrousbox.com:3000/book|//ystyle-go-125967.apse1.nitrousbox.com:3000/book" />
-    <!-- 配宿主主机配置监听程序，来发现其他主机发来的同步请求 -->
+        properties="peerDiscovery=manual,rmiUrls=//127.0.0.1:1615/book|//127.0.0.1:1616/book" />
+     <!--配宿主主机配置监听程序，来发现其他主机发来的同步请求-->
     <cacheManagerPeerListenerFactory
         class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-        properties="port=3000,socketTimeoutMillis=120000" />
+        properties="port=1614,socketTimeoutMillis=120000" />
     <!-- EhCache 的 RMI 集群模式还有另外一种节点发现方式，
         就是通过多播（ multicast ）来维护集群中的所有有效节点。
         这也是最为简单而且灵活的方式，与手工模式不同的是，
         每个节点上的配置信息都相同，大大方便了节点的部署，
         避免人为的错漏出现。在上述三个节点的例子中，配置如下：-->
-    <!--<cacheManagerPeerProviderFactory-->
-            <!--class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"-->
-            <!--properties="-->
-            <!--peerDiscovery=automatic,-->
-            <!--multicastGroupAddress=230.0.0.1,-->
-            <!--multicastGroupPort=4446,-->
-            <!--timeToLive=32"/>-->
+<!--    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="
+            peerDiscovery=automatic,
+            multicastGroupAddress=230.0.0.1,
+            multicastGroupPort=3000,
+            timeToLive=32"/>-->
     <defaultCache
             maxElementsInMemory="2147483647"
             eternal="false"

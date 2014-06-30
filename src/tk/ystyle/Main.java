@@ -5,7 +5,10 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import tk.ystyle.entity.Book;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
     CacheManager manager;//缓存管理器
@@ -13,17 +16,22 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.init();//初始化缓存
+        main.init(args);//初始化缓存
         main.menu();//显示菜单
     }
 
     /**
      * 初始化
      */
-    private void init() {
+    private void init(String[] path) {
         //指定ehcache.xml的位置
-//        String fileName=path;
-        manager = CacheManager.create();//new CacheManager(fileName);
+        if (path.length>0)
+        {
+            manager = CacheManager.create(path[0]);//new CacheManager(fileName);
+        }else {
+            manager = CacheManager.create();//new CacheManager(fileName);
+        }
+        System.out.println(manager.getActiveConfigurationText());
         //取出所有的cacheName
         String names[] = manager.getCacheNames();
         for (String name : names) {
