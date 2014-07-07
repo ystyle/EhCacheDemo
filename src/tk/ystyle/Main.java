@@ -181,10 +181,16 @@ public class Main {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {//定时 操作 : 查看缓存个数
-                String names[] = manager.getCacheNames();
+                String names[] =manager.getCacheNames();
                 for (String name : names) {
                     Cache cache = manager.getCache(name);
-                    System.out.println("缓存个数为：" + cache.getSize());
+                    System.out.println("缓存中的对象数：" + cache.getSize());
+                    //得到缓存对象占用内存的大小
+                     System.out.println("缓存对象占用内存:"+cache.getMemoryStoreSize());
+                    //得到缓存读取的命中次数
+                     System.out.println("缓存读取的命中次数:"+cache.getStatistics().cacheHitCount());
+                    //得到缓存读取的错失次数
+                     System.out.println("缓存读取的错失次数:"+cache.getStatistics().cacheMissCount());
                 }
             }
         }, 1L, 1000 * 3l);
