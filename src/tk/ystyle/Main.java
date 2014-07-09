@@ -25,9 +25,9 @@ public class Main {
     private void init(String[] path) {
         //指定ehcache.xml的位置
         if (path.length > 0) {
-            manager = CacheManager.create(path[0]);//new CacheManager(fileName);
+            manager = CacheManager.newInstance(path[0]);//new CacheManager(fileName);
         } else {
-            manager = CacheManager.create();//new CacheManager(fileName);
+            manager =CacheManager.newInstance(getClass().getResource("ehcache.xml"));//new CacheManager(fileName);
         }
         System.out.println(manager.getActiveConfigurationText());
         //取出所有的cacheName
