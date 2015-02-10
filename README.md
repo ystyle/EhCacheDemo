@@ -25,4 +25,4 @@ EhCacheDemo
 >如果有更改配置方式请看: _[tk.ystyle.Main](https://github.com/ystyle/EhCacheDemo/blob/master/src/main/java/tk/ystyle/Main.java#L30)_ 39行 
 
 
-JAR依赖详情请看 **pom.xml**
+JAR依赖详情请看 **[pom.xml](https://github.com/ystyle/EhCacheDemo/blob/master/pom.xml)**
