@@ -3,12 +3,13 @@
     <output-path>$PROJECT_DIR$/out/artifacts/EhCacheJGroup_jar</output-path>
     <root id="archive" name="EhCache.jar">
       <element id="module-output" name="EhCache" />
-      <element id="extracted-dir" path="D:/JAVA-lib/EhCache/ehcache-2.8.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="D:/JAVA-lib/EhCache/slf4j-api-1.6.6.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="D:/JAVA-lib/EhCache/slf4j-jdk14-1.6.6.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="D:/JAVA-lib/EhCache/ehcache-jgroupsreplication-1.7.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="D:/JAVA-lib/EhCache/jgroups-3.4.4.Final.jar" path-in-jar="/" />
-      <element id="library" level="project" name="ehcache-2.8.3" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.5.2/ehcache-core-2.5.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-jgroupsreplication/1.7/ehcache-jgroupsreplication-1.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jgroups/jgroups/3.6.1.Final/jgroups-3.6.1.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.10/slf4j-api-1.7.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-jdk14/1.7.10/slf4j-jdk14-1.7.10.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.5.2" />
     </root>
   </artifact>
 </component>

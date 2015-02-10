@@ -1,5 +1,5 @@
-ÉîÈëÌ½ÌÖÔÚ¼¯Èº»·¾³ÖĞÊ¹ÓÃ EhCache »º´æÏµÍ³
+æ·±å…¥æ¢è®¨åœ¨é›†ç¾¤ç¯å¢ƒä¸­ä½¿ç”¨ EhCache ç¼“å­˜ç³»ç»Ÿ
 http://www.ibm.com/developerworks/cn/java/j-lo-ehcache/
 
-EhCache ·Ö²¼Ê½ÏÂ»º´æ¶ÔÏóµÄÍ¬²½ - OPEN ¿ª·¢¾­Ñé¿â
+EhCache åˆ†å¸ƒå¼ä¸‹ç¼“å­˜å¯¹è±¡çš„åŒæ­¥ - OPEN å¼€å‘ç»éªŒåº“
 http://www.open-open.com/lib/view/open1346722442303.html
